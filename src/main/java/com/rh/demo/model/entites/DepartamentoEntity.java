@@ -1,9 +1,12 @@
 package com.rh.demo.model.entites;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_departamento_registro")
@@ -20,4 +23,8 @@ public class DepartamentoEntity {
 
     @Column(name = "descricao_departamento", length = 200, nullable = false)
     private String descricao;
+
+    @OneToMany(mappedBy = "departamento")
+    @JsonIgnore // evita recursividade infinita
+    private List<FuncionarioEntity> funcionarios;
 }

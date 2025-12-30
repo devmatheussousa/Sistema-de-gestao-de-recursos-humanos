@@ -16,6 +16,7 @@ import java.time.LocalDate;
 public class FuncionarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id_funcionario")
     private Long id;
 
     @Column(name = "nome_funcionario")
@@ -39,6 +40,12 @@ public class FuncionarioEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "status_funcionario")
     private StatusFuncionario status;
+
+    //relacionamento
+
+    @ManyToOne // muitos funcionarios para um departamento
+    @JoinColumn(name = "departamento_id")
+    DepartamentoEntity departamento;
 }
 
 
