@@ -42,4 +42,8 @@ public class TreinamentoEntity {
             inverseJoinColumns = @JoinColumn(name = "funcionario_id")
     )
     private List<FuncionarioEntity> funcionarios = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "treinamentos") // um treinamento pode ser para vários cargos
+    @ToString.Exclude
+    private List<CargoEntity> cargos = new ArrayList<>(); // treinamento pode ser para vários cargos
 }

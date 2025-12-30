@@ -5,11 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_cargo_registro")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
+@ToString(exclude = {"funcionario"})
 public class CargoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,4 +32,12 @@ public class CargoEntity {
 
     @OneToOne(mappedBy = "cargo")
     private FuncionarioEntity funcionario;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_cargo_treinamento",
+            joinColumns = @JoinColumn(name = "cargo_id"),
+            inverseJoinColumns = @JoinColumn(name = "treinamento_id")
+    )
+    private List<TreinamentoEntity> treinamentos = new ArrayList<>();
 }
