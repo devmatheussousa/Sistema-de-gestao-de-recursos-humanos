@@ -18,7 +18,6 @@ public class RecrutamentoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_recrutamento")
     private Long id;
 
     @Column(name = "titulo_vaga")

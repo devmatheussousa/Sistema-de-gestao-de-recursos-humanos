@@ -17,7 +17,6 @@ public class FeriasEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_ferias")
     private Long id;
 
     @Column(name = "data_inicio_ferias", nullable = false)
