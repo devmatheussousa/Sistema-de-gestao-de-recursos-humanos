@@ -40,4 +40,7 @@ public class CargoEntity {
             inverseJoinColumns = @JoinColumn(name = "treinamento_id")
     )
     private List<TreinamentoEntity> treinamentos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "cargo")
+    private List<RecrutamentoEntity> recrutamentos = new ArrayList<>();
 }

@@ -26,4 +26,10 @@ public class CandidatoEntity {
     @Enumerated(EnumType.STRING) // para persistir o enum como string no banco de dados
     @Column(name = "status_candidato")
     private StatusCandidato statusCandidato;
+
+    // ================= RELACIONAMENTOS =================
+    // 1 Candidato -> recrutamento
+    @ManyToOne
+    @JoinColumn(name = "recrutamento_id", nullable = false)
+    private RecrutamentoEntity recrutamento;
 }

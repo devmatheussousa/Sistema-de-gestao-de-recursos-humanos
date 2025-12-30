@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_entrevista_recrutamento")
@@ -31,4 +33,10 @@ public class EntrevistaEntity {
 
     @Column(name = "observacoes_entrevista", length = 255) // observações adicionais sobre a entrevista
     private String observacoesEntrevista;
+
+    // ================= RELACIONAMENTOS =================
+    // 1 Entrevista -> recrutamento
+    @ManyToOne
+    @JoinColumn(name = "recrutamento_id", nullable = false)
+    private RecrutamentoEntity recrutamento;
 }
