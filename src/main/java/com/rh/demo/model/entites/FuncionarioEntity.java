@@ -17,7 +17,6 @@ import java.util.List;
 public class FuncionarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_funcionario")
     private Long id;
 
     @Column(name = "nome_funcionario")
@@ -66,6 +65,10 @@ public class FuncionarioEntity {
     @ManyToMany(mappedBy = "funcionarios")
     @ToString.Exclude
     private List<TreinamentoEntity> treinamentos;
+
+    @ManyToMany(mappedBy = "funcionarios")
+    @ToString.Exclude
+    private List<BeneficioEntity> beneficios;
 
 
 }

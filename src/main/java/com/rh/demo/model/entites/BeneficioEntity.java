@@ -6,11 +6,14 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "tb_beneficios_registros")
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString(exclude = {"id"})
+@ToString(exclude = {"funcionarios"})
 public class BeneficioEntity {
 
     @Id
@@ -29,4 +32,12 @@ public class BeneficioEntity {
     @Column(name = "tipo_beneficio")
     @Enumerated(EnumType.STRING)
     private TipoBeneficio tipoBeneficio;
+
+    @ManyToMany
+    @JoinTable(
+            name = "beneficio_funcionario",
+            joinColumns = @JoinColumn(name = "beneficio_id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id") // relacionamento bidirecional
+    )
+    private List<FuncionarioEntity> funcionarios = new ArrayList<>();
 }
