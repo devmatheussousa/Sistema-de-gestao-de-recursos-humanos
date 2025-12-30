@@ -32,4 +32,8 @@ public class FeriasEntity {
     @Column(name = "status_ferias", nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusFerias statusFerias;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id")
+    private FuncionarioEntity funcionario;
 }

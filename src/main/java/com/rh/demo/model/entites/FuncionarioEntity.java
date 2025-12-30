@@ -55,6 +55,10 @@ public class FuncionarioEntity {
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitos pontos
     List<PontoEntity> ponto;
 
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitas férias
+    @ToString.Exclude // evita recursão infinita
+    List<FeriasEntity> ferias;
+
 
 }
 
