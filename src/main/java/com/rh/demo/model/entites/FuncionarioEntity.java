@@ -46,6 +46,10 @@ public class FuncionarioEntity {
     @ManyToOne // muitos funcionarios para um departamento
     @JoinColumn(name = "departamento_id")
     DepartamentoEntity departamento;
+
+    @OneToOne // um funcionario para um cargo
+    @JoinColumn(name = "cargo_id")
+    CargoEntity cargo;
 }
 
 

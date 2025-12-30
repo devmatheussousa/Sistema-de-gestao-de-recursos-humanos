@@ -26,4 +26,7 @@ public class CargoEntity {
 
     @Column(name = "salario_cargo", nullable = false)
     private Double salario;
+
+    @OneToOne(mappedBy = "cargo")
+    private FuncionarioEntity funcionario;
 }
