@@ -50,6 +50,10 @@ public class FuncionarioEntity {
     @OneToOne // um funcionario para um cargo
     @JoinColumn(name = "cargo_id")
     CargoEntity cargo;
+
+    @OneToOne // um funcionario para um ponto
+    @JoinColumn(name = "ponto_id")
+    PontoEntity ponto;
 }
 
 

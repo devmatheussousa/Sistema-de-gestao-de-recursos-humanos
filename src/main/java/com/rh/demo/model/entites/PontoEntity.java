@@ -23,5 +23,8 @@ public class PontoEntity {
     @Column(name = "tipo_ponto", nullable = false)
     private TipoPonto tipo;
 
+    @OneToOne(mappedBy = "ponto") // um ponto para um funcionario
+    private FuncionarioEntity funcionario;
+
 
 }
