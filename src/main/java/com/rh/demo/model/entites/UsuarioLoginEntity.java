@@ -1,5 +1,6 @@
 package com.rh.demo.model.entites;
 
+import com.rh.demo.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,4 +22,8 @@ public class UsuarioLoginEntity {
 
     @Column(name = "login_password", length = 255)
     private String password;
+
+    @Column(name = "login_tipo_usuario", length = 255)
+    @Enumerated(EnumType.STRING)
+    private TipoUsuario tipoUsuario;
 }
