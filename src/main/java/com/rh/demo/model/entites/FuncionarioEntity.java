@@ -63,6 +63,10 @@ public class FuncionarioEntity {
     @ToString.Exclude // evita recursão infinita
     List<AvaliacaoEntity> avaliacao;
 
+    @ManyToMany(mappedBy = "funcionarios")
+    @ToString.Exclude
+    private List<TreinamentoEntity> treinamentos;
+
 
 }
 

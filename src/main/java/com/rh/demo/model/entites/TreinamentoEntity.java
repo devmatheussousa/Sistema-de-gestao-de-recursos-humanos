@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_treinamento_candidato")
@@ -11,7 +13,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "funcionarios")
 public class TreinamentoEntity {
 
     @Id
@@ -32,4 +34,12 @@ public class TreinamentoEntity {
 
     @Column(name = "data_fim_treinamento", nullable = false)
     private LocalDate dataFimTreinamento;
+
+    @ManyToMany
+            @JoinTable(
+            name = "treinamento_funcionario",
+            joinColumns = @JoinColumn(name = "treinamento_id"),
+            inverseJoinColumns = @JoinColumn(name = "funcionario_id")
+    )
+    private List<FuncionarioEntity> funcionarios = new ArrayList<>();
 }
