@@ -2,6 +2,9 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.StatusCandidato;
 import jakarta.persistence.*;
+import lombok.ToString;
+
+import java.util.List;
 
 @Entity
 @Table(name = "tb_candidato_registration")
@@ -32,4 +35,8 @@ public class CandidatoEntity {
     @ManyToOne
     @JoinColumn(name = "recrutamento_id", nullable = false)
     private RecrutamentoEntity recrutamento;
+
+    @ManyToMany(mappedBy = "candidatos")
+    @ToString.Exclude
+    private List<EntrevistaEntity> entrevista;
 }

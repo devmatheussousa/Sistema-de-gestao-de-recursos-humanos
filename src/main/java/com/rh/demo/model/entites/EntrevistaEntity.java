@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
+@ToString(exclude = {"candidatos"})
 public class EntrevistaEntity {
 
     @Id
@@ -39,4 +39,12 @@ public class EntrevistaEntity {
     @ManyToOne
     @JoinColumn(name = "recrutamento_id", nullable = false)
     private RecrutamentoEntity recrutamento;
+
+    @ManyToMany
+    @JoinTable(
+                name = "tb_entrevista_candidato",
+                joinColumns = @JoinColumn(name = "entrevista_id"),
+                inverseJoinColumns = @JoinColumn(name = "candidato_id")
+    )
+    private List<CandidatoEntity> candidatos = new ArrayList<>();
 }
