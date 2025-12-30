@@ -70,6 +70,10 @@ public class FuncionarioEntity {
     @ToString.Exclude
     private List<BeneficioEntity> beneficios;
 
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitas folhas de pagamento
+    @ToString.Exclude // evita recursão infinita
+    private List<FolhaPagamentoEntity> folhaPagamento;
+
 
 }
 

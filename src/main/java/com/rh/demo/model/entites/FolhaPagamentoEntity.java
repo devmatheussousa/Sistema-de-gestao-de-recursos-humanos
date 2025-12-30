@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Table(name = "folha_pagamento_funcionario")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
+@ToString(exclude = {"funcionario"})
 public class FolhaPagamentoEntity {
 
     @Id
@@ -35,4 +35,8 @@ public class FolhaPagamentoEntity {
 
     @Column(name = "data_pagamento_folha_pagamento", nullable = false)
     private LocalDate dataPagamento;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", nullable = false)
+    private FuncionarioEntity funcionario;
 }
