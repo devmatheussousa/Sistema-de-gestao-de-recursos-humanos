@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "funcionario")
 public class AvaliacaoEntity {
 
     @Id
@@ -26,4 +26,8 @@ public class AvaliacaoEntity {
 
     @Column(name = "feedback_avaliacao", length = 255)
     private String feedback;
+
+    @ManyToOne
+    @JoinColumn(name = "funcionario_id", nullable = false)
+    private FuncionarioEntity funcionario;
 }
