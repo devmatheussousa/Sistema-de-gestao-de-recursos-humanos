@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_funcionario_registro")
@@ -51,9 +52,10 @@ public class FuncionarioEntity {
     @JoinColumn(name = "cargo_id")
     CargoEntity cargo;
 
-    @OneToOne // um funcionario para um ponto
-    @JoinColumn(name = "ponto_id")
-    PontoEntity ponto;
+    @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitos pontos
+    List<PontoEntity> ponto;
+
+
 }
 
 
