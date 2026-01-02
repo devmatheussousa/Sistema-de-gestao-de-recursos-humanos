@@ -2,9 +2,7 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.StatusFuncionario;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"id"})
+@Getter
+@Setter
 public class FuncionarioEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,9 +1,7 @@
 package com.rh.demo.model.entites;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +11,8 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"funcionario"})
+@Getter
+@Setter
 public class CargoEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

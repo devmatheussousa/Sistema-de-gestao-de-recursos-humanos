@@ -2,12 +2,17 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.StatusCandidato;
 import jakarta.persistence.*;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Table(name = "tb_candidato_registration")
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class CandidatoEntity {
 
     @Id

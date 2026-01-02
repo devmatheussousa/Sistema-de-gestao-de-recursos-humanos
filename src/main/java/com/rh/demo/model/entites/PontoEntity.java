@@ -2,6 +2,8 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.TipoPonto;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -9,6 +11,8 @@ import java.time.LocalTime;
 
 @Entity
 @Table(name = "tb_pontos_registro")
+@Getter
+@Setter
 public class PontoEntity {
 
     @Id

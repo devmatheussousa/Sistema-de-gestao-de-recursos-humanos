@@ -2,9 +2,7 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.TipoBeneficio;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"funcionarios"})
+@Getter
+@Setter
 public class BeneficioEntity {
 
     @Id

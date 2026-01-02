@@ -1,9 +1,7 @@
 package com.rh.demo.model.entites;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -12,6 +10,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"funcionario"})
+@Getter
+@Setter
 public class FolhaPagamentoEntity {
 
     @Id

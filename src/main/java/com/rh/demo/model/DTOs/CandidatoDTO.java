@@ -1,6 +1,7 @@
 package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.StatusCandidato;
+import com.rh.demo.model.entites.EntrevistaEntity;
 import com.rh.demo.model.entites.RecrutamentoEntity;
 
 import java.util.List;

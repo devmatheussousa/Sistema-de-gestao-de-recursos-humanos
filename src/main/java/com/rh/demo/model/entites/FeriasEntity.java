@@ -2,9 +2,7 @@ package com.rh.demo.model.entites;
 
 import com.rh.demo.enums.StatusFerias;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDate;
 
@@ -13,6 +11,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = {"id"})
+@Getter
+@Setter
 public class FeriasEntity {
 
     @Id

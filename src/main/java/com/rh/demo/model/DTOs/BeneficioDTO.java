@@ -1,6 +1,7 @@
 package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.TipoBeneficio;
+import com.rh.demo.model.entites.FuncionarioEntity;
 
 import java.util.List;
 
