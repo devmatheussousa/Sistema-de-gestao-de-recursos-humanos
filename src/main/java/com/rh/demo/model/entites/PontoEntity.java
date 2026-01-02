@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
+@Table(name = "tb_pontos_registro")
 public class PontoEntity {
 
     @Id
