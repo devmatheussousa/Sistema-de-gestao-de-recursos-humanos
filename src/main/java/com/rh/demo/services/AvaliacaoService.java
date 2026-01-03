@@ -4,6 +4,7 @@ import com.rh.demo.mappers.AvaliacaoMapper;
 import com.rh.demo.model.DTOs.AvaliacaoDTO;
 import com.rh.demo.model.entites.AvaliacaoEntity;
 import com.rh.demo.repositories.AvaliacaoRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -51,14 +52,10 @@ public class AvaliacaoService {
     }
 
 
-    //Listar todas as avaliações
-    public AvaliacaoDTO listarAvaliacaoPorId(Long id){
-        Optional<AvaliacaoEntity> avaliacaoEntity = avaliacaoRepository.findById(id);
-        if (avaliacaoEntity.isEmpty()) {
-            return null;
-        }
-        Optional<AvaliacaoDTO> avaliacaoPorId = avaliacaoEntity.map(avaliacaoMapper::toDTO); // Converte a entidade para DTO
-        return avaliacaoPorId.orElse(null);
+    // Buscar avaliação por ID
+    public Optional<AvaliacaoDTO> buscarAvaliacaoPorId(Long id){
+        return  avaliacaoRepository.findById(id) // Busca a avaliação pelo ID no repositório
+                .map(avaliacaoMapper::toDTO); // Mapeia a entidade AvaliacaoEntity para AvaliacaoDTO, se encontrada
     }
 
     //criar uma avaliação
@@ -69,21 +66,21 @@ public class AvaliacaoService {
     }
 
     //deletar uma avaliação
+    @Transactional //garante que a operação de exclusão seja realizada dentro de uma transação
     public void deletarAvaliacao(Long id) {
+        if(!avaliacaoRepository.existsById(id)){
+            throw new RuntimeException("Avaliação não encontrada com o ID: " + id);
+        }
         avaliacaoRepository.deleteById(id);
     }
 
     //atualizar uma avaliação
+    @Transactional //garante que a operação de atualização seja realizada dentro de uma transação
     public AvaliacaoDTO atualizarAvaliacao(Long id, AvaliacaoDTO avaliacaoDTO) {
-        Optional<AvaliacaoEntity> avaliacaoExistente = avaliacaoRepository.findById(id);
-        if (avaliacaoExistente.isPresent()) {
-            AvaliacaoEntity avaliacaoToUpdate = avaliacaoExistente.get();
-            avaliacaoToUpdate.setNotaAvaliacao(avaliacaoDTO.notaAvaliacao());
-            avaliacaoToUpdate.setFeedback(avaliacaoDTO.feedback());
-            AvaliacaoEntity avaliacaoAtualizada = avaliacaoRepository.save(avaliacaoToUpdate);
-            return avaliacaoMapper.toDTO(avaliacaoAtualizada);
-        } else {
-            return null;
-        }
+        AvaliacaoEntity avaliacao = avaliacaoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com o ID: " + id));
+        avaliacao.setNotaAvaliacao(avaliacaoDTO.notaAvaliacao());
+        avaliacao.setFeedback(avaliacaoDTO.feedback());
+        return avaliacaoMapper.toDTO(avaliacaoRepository.save(avaliacao));
     }
 }
