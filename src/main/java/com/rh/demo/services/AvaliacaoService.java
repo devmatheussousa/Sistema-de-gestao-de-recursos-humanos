@@ -54,8 +54,9 @@ public class AvaliacaoService {
 
     // Buscar avaliação por ID
     public Optional<AvaliacaoDTO> buscarAvaliacaoPorId(Long id){
-        return  avaliacaoRepository.findById(id) // Busca a avaliação pelo ID no repositório
-                .map(avaliacaoMapper::toDTO); // Mapeia a entidade AvaliacaoEntity para AvaliacaoDTO, se encontrada
+        return Optional.ofNullable(avaliacaoRepository.findById(id) // Busca a avaliação pelo ID no repositório
+                .map(avaliacaoMapper::toDTO) // Mapeia a entidade AvaliacaoEntity para AvaliacaoDTO, se encontrada
+                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com o ID: " + id))); // Lança exceção se não encontrada
     }
 
     //criar uma avaliação
