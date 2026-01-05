@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "funcionarios")
+@ToString
 public class TreinamentoEntity {
 
     @Id

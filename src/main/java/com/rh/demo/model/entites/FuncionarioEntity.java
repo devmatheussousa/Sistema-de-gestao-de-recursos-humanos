@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "tb_funcionario_registro")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
+@ToString
 @Getter
 @Setter
 public class FuncionarioEntity {

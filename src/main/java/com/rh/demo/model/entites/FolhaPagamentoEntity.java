@@ -9,7 +9,7 @@ import java.time.LocalDate;
 @Table(name = "folha_pagamento_funcionario")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"funcionario"})
+@ToString
 @Getter
 @Setter
 public class FolhaPagamentoEntity {

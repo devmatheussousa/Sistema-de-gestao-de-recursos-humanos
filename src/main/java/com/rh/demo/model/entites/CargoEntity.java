@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "tb_cargo_registro")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"funcionario"})
+@ToString
 @Getter
 @Setter
 public class CargoEntity {

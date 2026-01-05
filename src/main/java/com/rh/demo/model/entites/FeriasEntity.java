@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Table(name = "tb_ferias_funcionario")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
+@ToString
 @Getter
 @Setter
 public class FeriasEntity {

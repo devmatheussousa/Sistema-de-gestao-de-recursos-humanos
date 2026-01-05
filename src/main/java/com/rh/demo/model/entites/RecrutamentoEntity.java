@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"id"})
+@ToString
 public class RecrutamentoEntity {
 
     @Id

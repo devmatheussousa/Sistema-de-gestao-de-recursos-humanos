@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = "funcionario")
+@ToString
 public class AvaliacaoEntity {
 
     @Id
