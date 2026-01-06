@@ -38,6 +38,7 @@ public class EntrevistaEntity {
     // 1 Entrevista -> recrutamento
     @ManyToOne
     @JoinColumn(name = "recrutamento_id", nullable = false)
+    @ToString.Exclude
     private RecrutamentoEntity recrutamento;
 
     @ManyToMany
@@ -46,5 +47,6 @@ public class EntrevistaEntity {
                 joinColumns = @JoinColumn(name = "entrevista_id"),
                 inverseJoinColumns = @JoinColumn(name = "candidato_id")
     )
+    @ToString.Exclude
     private List<CandidatoEntity> candidatos = new ArrayList<>();
 }

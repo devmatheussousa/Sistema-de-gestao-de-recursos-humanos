@@ -4,6 +4,7 @@ import com.rh.demo.enums.TipoPonto;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,6 +14,7 @@ import java.time.LocalTime;
 @Table(name = "tb_pontos_registro")
 @Getter
 @Setter
+@ToString
 public class PontoEntity {
 
     @Id
@@ -30,6 +32,7 @@ public class PontoEntity {
 
     @ManyToOne() // um ponto para um funcionario
     @JoinColumn(name = "funcionario_id")
+    @ToString.Exclude
     private FuncionarioEntity funcionario;
 
 

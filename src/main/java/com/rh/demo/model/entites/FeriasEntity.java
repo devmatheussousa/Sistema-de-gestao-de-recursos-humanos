@@ -23,7 +23,7 @@ public class FeriasEntity {
     private LocalDate dataInicio;
 
     @Column(name = "data_fim_ferias", nullable = false)
-    private Double dataFim;
+    private LocalDate dataFim;
 
     @Column(name = "dias_ferias", nullable = false)
     private Integer dias;
@@ -34,5 +34,6 @@ public class FeriasEntity {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id")
+    @ToString.Exclude
     private FuncionarioEntity funcionario;
 }

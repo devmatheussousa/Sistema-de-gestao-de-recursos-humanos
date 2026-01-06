@@ -10,7 +10,7 @@ import java.util.List;
 @Table(name = "tb_departamento_registro")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString(exclude = {"id"})
+@ToString
 @Getter
 @Setter
 public class DepartamentoEntity {
@@ -26,5 +26,6 @@ public class DepartamentoEntity {
 
     @OneToMany(mappedBy = "departamento")
     @JsonIgnore // evita recursividade infinita
+    @ToString.Exclude
     private List<FuncionarioEntity> funcionarios;
 }

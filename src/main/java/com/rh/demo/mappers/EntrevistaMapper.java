@@ -3,7 +3,6 @@ package com.rh.demo.mappers;
 import com.rh.demo.model.DTOs.EntrevistaDTO;
 import com.rh.demo.model.entites.CandidatoEntity;
 import com.rh.demo.model.entites.EntrevistaEntity;
-import org.flywaydb.core.internal.proprietaryStubs.LicensingConfigurationExtensionStub;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

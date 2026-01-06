@@ -41,6 +41,7 @@ public class TreinamentoEntity {
             joinColumns = @JoinColumn(name = "treinamento_id"),
             inverseJoinColumns = @JoinColumn(name = "funcionario_id")
     )
+    @ToString.Exclude
     private List<FuncionarioEntity> funcionarios = new ArrayList<>();
 
     @ManyToMany(mappedBy = "treinamentos") // um treinamento pode ser para vários cargos

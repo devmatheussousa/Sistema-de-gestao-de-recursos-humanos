@@ -29,5 +29,6 @@ public class AvaliacaoEntity {
 
     @ManyToOne
     @JoinColumn(name = "funcionario_id", nullable = false)
+    @ToString.Exclude
     private FuncionarioEntity funcionario;
 }

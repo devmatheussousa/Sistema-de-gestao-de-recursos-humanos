@@ -42,15 +42,18 @@ public class RecrutamentoEntity {
     // 1 Recrutamento -> cargo
     @ManyToOne
     @JoinColumn(name = "cargo_id", nullable = false)
+    @ToString.Exclude
     private CargoEntity cargo;
 
 
     // 2 Recrutamento -> candidatos
     @OneToMany(mappedBy = "recrutamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<CandidatoEntity> candidatos = new ArrayList<>();
 
 
     // 3 Recrutamento -> entrevistas
     @OneToMany(mappedBy = "recrutamento", cascade = CascadeType.ALL, orphanRemoval = true)
+    @ToString.Exclude
     private List<EntrevistaEntity> entrevistas = new ArrayList<>();
 }

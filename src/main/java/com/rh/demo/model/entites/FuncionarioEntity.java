@@ -45,13 +45,16 @@ public class FuncionarioEntity {
 
     @ManyToOne // muitos funcionarios para um departamento
     @JoinColumn(name = "departamento_id")
+    @ToString.Exclude
     DepartamentoEntity departamento;
 
     @OneToOne // um funcionario para um cargo
     @JoinColumn(name = "cargo_id")
+    @ToString.Exclude
     CargoEntity cargo;
 
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitos pontos
+    @ToString.Exclude
     List<PontoEntity> ponto;
 
     @OneToMany(mappedBy = "funcionario", cascade = CascadeType.ALL) // um funcionario para muitas férias

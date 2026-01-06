@@ -39,6 +39,7 @@ public class CandidatoEntity {
     // 1 Candidato -> recrutamento
     @ManyToOne
     @JoinColumn(name = "recrutamento_id", nullable = false)
+    @ToString.Exclude
     private RecrutamentoEntity recrutamento;
 
     @ManyToMany(mappedBy = "candidatos")

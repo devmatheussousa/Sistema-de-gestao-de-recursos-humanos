@@ -17,8 +17,14 @@ import java.util.List;
 public class BeneficioEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "beneficio_seq")
+    @SequenceGenerator(
+            name = "beneficio_seq",
+            sequenceName = "tb_beneficios_registros_seq",
+            allocationSize = 1 // ⚠️ TEM que bater com o banco
+    )
     private Long id;
+
 
     @Column(name = "nome_beneficio")
     private String nome;
@@ -39,5 +45,6 @@ public class BeneficioEntity {
             joinColumns = @JoinColumn(name = "beneficio_id"),
             inverseJoinColumns = @JoinColumn(name = "funcionario_id") // relacionamento bidirecional
     )
+    @ToString.Exclude
     private List<FuncionarioEntity> funcionarios = new ArrayList<>();
 }

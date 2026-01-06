@@ -31,6 +31,7 @@ public class CargoEntity {
     private Double salario;
 
     @OneToOne(mappedBy = "cargo")
+    @ToString.Exclude
     private FuncionarioEntity funcionario;
 
     @ManyToMany
@@ -39,8 +40,10 @@ public class CargoEntity {
             joinColumns = @JoinColumn(name = "cargo_id"),
             inverseJoinColumns = @JoinColumn(name = "treinamento_id")
     )
+    @ToString.Exclude
     private List<TreinamentoEntity> treinamentos = new ArrayList<>();
 
     @OneToMany(mappedBy = "cargo")
+    @ToString.Exclude
     private List<RecrutamentoEntity> recrutamentos = new ArrayList<>();
 }
