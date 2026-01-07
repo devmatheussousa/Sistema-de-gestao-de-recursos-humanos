@@ -1,15 +1,21 @@
 package com.rh.demo.model.DTOs;
 
-import com.rh.demo.model.entites.FuncionarioEntity;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+
 import java.util.List;
 
 public record CargoDTO(
         Long id,
-        String nome,
-        String descricao,
-        String nivel,
+
+        @NotNull String nome,
+        @Size(max = 255) String descricao,
+        @NotNull String nivel,
+        @NotNull @DecimalMin(value = "0.0", inclusive = true)
         Double salario,
-        FuncionarioEntity funcionario,
+        @NotNull Long funcionarioId,
+
         List<Long> treinamentosIds,
         List<Long> recrutamentoIds
 ) {
