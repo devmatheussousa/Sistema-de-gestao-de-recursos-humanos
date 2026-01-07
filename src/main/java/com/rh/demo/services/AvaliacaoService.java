@@ -3,7 +3,9 @@ package com.rh.demo.services;
 import com.rh.demo.mappers.AvaliacaoMapper;
 import com.rh.demo.model.DTOs.AvaliacaoDTO;
 import com.rh.demo.model.entites.AvaliacaoEntity;
+import com.rh.demo.model.entites.FuncionarioEntity;
 import com.rh.demo.repositories.AvaliacaoRepository;
+import com.rh.demo.repositories.FuncionarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,11 +17,13 @@ public class AvaliacaoService {
 
     private final AvaliacaoRepository avaliacaoRepository;
     private final AvaliacaoMapper avaliacaoMapper;
+    private final FuncionarioRepository funcionarioRepository;
 
 
-    public AvaliacaoService(AvaliacaoRepository avaliacaoRepository, AvaliacaoMapper avaliacaoMapper){
+    public AvaliacaoService(AvaliacaoRepository avaliacaoRepository, AvaliacaoMapper avaliacaoMapper, FuncionarioRepository funcionarioRepository){
         this.avaliacaoRepository = avaliacaoRepository;
         this.avaliacaoMapper = avaliacaoMapper;
+        this.funcionarioRepository = funcionarioRepository;
     }
 
     //listar todas as avaliações
@@ -53,15 +57,25 @@ public class AvaliacaoService {
 
 
     // Buscar avaliação por ID
-    public Optional<AvaliacaoDTO> buscarAvaliacaoPorId(Long id){
-        return Optional.ofNullable(avaliacaoRepository.findById(id) // Busca a avaliação pelo ID no repositório
+    public AvaliacaoDTO buscarAvaliacaoPorId(Long id){
+        return avaliacaoRepository.findById(id) // Busca a avaliação pelo ID no repositório
                 .map(avaliacaoMapper::toDTO) // Mapeia a entidade AvaliacaoEntity para AvaliacaoDTO, se encontrada
-                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com o ID: " + id))); // Lança exceção se não encontrada
+                .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com o ID: " + id)); // Lança exceção se não encontrada
     }
 
     //criar uma avaliação
     public AvaliacaoDTO criarAvaliacao(AvaliacaoDTO avaliacaoDTO){
+
+        // Busca o funcionário associado à avaliação pelo ID fornecido no DTO
+        FuncionarioEntity funcionario = funcionarioRepository
+                .findById(avaliacaoDTO.funcionarioId())
+                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado com o ID: " + avaliacaoDTO.funcionarioId()));
+
+        // Converte o DTO para a entidade AvaliacaoEntity
         AvaliacaoEntity avaliacaoEntity = avaliacaoMapper.toEntity(avaliacaoDTO);
+        avaliacaoEntity.setFuncionario(funcionario); // Define o funcionário associado à avaliação
+
+        // Salva a nova avaliação no repositório
         AvaliacaoEntity novaAvaliacao = avaliacaoRepository.save(avaliacaoEntity);
         return avaliacaoMapper.toDTO(novaAvaliacao);
     }
@@ -80,6 +94,8 @@ public class AvaliacaoService {
     public AvaliacaoDTO atualizarAvaliacao(Long id, AvaliacaoDTO avaliacaoDTO) {
         AvaliacaoEntity avaliacao = avaliacaoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Avaliação não encontrada com o ID: " + id));
+
+        avaliacao.setDataAvaliacao(avaliacaoDTO.dataAvaliacao());
         avaliacao.setNotaAvaliacao(avaliacaoDTO.notaAvaliacao());
         avaliacao.setFeedback(avaliacaoDTO.feedback());
         return avaliacaoMapper.toDTO(avaliacaoRepository.save(avaliacao));

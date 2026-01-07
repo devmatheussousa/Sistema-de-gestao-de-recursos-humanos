@@ -18,7 +18,6 @@ public class BeneficioMapper {
                 .toList();
 
         return new BeneficioDTO(
-                entity.getId(),
                 entity.getNome(),
                 entity.getDescricao(),
                 entity.getValor(),
@@ -30,7 +29,6 @@ public class BeneficioMapper {
     //caminho inverso Entity a DTO
     public BeneficioEntity toEntity(BeneficioDTO dto){
         BeneficioEntity entity = new BeneficioEntity();
-        entity.setId(dto.id());
         entity.setNome(dto.nome());
         entity.setDescricao(dto.descricao());
         entity.setValor(dto.valor());

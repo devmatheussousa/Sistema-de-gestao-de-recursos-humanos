@@ -2,6 +2,7 @@ package com.rh.demo.controllers;
 
 import com.rh.demo.model.DTOs.AvaliacaoDTO;
 import com.rh.demo.services.AvaliacaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,7 +20,7 @@ public class AvaliacaoController {
 
     //criar avaliação
     @PostMapping("/criar")
-    public ResponseEntity<AvaliacaoDTO> criarAvaliacao(@RequestBody AvaliacaoDTO novaAvaliacaoDTO){
+    public ResponseEntity<AvaliacaoDTO> criarAvaliacao(@RequestBody @Valid AvaliacaoDTO novaAvaliacaoDTO){
        AvaliacaoDTO avaliacaoDTO = avaliacaoService.criarAvaliacao(novaAvaliacaoDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoDTO);
     }
@@ -34,9 +35,7 @@ public class AvaliacaoController {
     //Buscar por Id
     @GetMapping("/{id}")
     public ResponseEntity<AvaliacaoDTO> buscarAvaliacaoPorId(@PathVariable Long id) {
-        return avaliacaoService.buscarAvaliacaoPorId(id) // Busca a avaliação pelo ID usando o serviço
-                .map(ResponseEntity::ok) // Se encontrada, retorna 200 OK com o AvaliacaoDTO no corpo
-                .orElse(ResponseEntity.notFound().build()); // Se não encontrada, retorna 404 Not Found build() serve para construir a resposta HTTP sem corpo
+        return ResponseEntity.ok(avaliacaoService.buscarAvaliacaoPorId(id));
     }
 
     //Deletar avaliação
