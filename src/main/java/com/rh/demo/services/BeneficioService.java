@@ -56,15 +56,13 @@ public class BeneficioService {
     }
 
     // Atualizar benefício
-    public AvaliacaoDTO avaliacaoDTO(Long id, BeneficioDTO beneficioDTO){
+    public BeneficioDTO beneficioDTO(Long id, BeneficioDTO dto){
         var beneficio = beneficioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Benefício não encontrado com o ID: " + id));
-        beneficio.setNome(beneficioDTO.nome());
-        beneficio.setDescricao(beneficioDTO.descricao());
-        beneficio.setValor(beneficioDTO.valor());
-        beneficio.setTipoBeneficio(beneficioDTO.tipoBeneficio());
-        var beneficioAtualizado = beneficioRepository.save(beneficio);
-        return beneficioMapper.toDTO(beneficioAtualizado);
+        beneficio.setNome(dto.nome());
+        beneficio.setValor(dto.valor());
+        beneficio.setDescricao(dto.descricao());
+        return beneficioMapper.toDTO(beneficio);
     }
 
 
