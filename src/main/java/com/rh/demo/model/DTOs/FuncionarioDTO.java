@@ -2,35 +2,47 @@ package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.StatusFuncionario;
 import com.rh.demo.model.entites.CargoEntity;
-import com.rh.demo.model.entites.DepartamentoEntity;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public record FuncionarioDTO(
         Long id,
-        @NonNull
+
+        @NotNull
         String nome,
-        @NonNull @Size(min = 1, max = 13)
-        Long cpf,
-        @NonNull @Size(min = 1, max = 13)
-        Long telefone,
-        @NonNull
+
+        @NotNull @Size(min = 1, max = 13)
+        String cpf,
+
+        @NotNull @Size(min = 1, max = 13)
+        String telefone,
+
+        @NotNull @Size(min = 1, max = 50)
         String email,
-        @NonNull
+
+        @NotNull
         LocalDate dataNascimento,
-        @NonNull
+
+        @NotNull
         LocalDate dataAdmissao,
-        @NonNull @Size(min = 1, max = 13)
+
+        @NotNull @DecimalMin("0.0")
         Double salarioBase,
-        @NonNull
+
+        @NotNull
         StatusFuncionario status,
-        @NonNull
+
+        @NotNull
         Long departamentoId,
-        @NonNull
-        CargoEntity cargo,
+
+        @NotNull
+        Long cargoId,
+
         List<Long> pontoIds,
         List<Long> feriasIds,
         List<Long> avaliacaoIds,

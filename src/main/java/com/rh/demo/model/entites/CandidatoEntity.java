@@ -37,12 +37,27 @@ public class CandidatoEntity {
 
     // ================= RELACIONAMENTOS =================
     // 1 Candidato -> recrutamento
+    /**
+     * ❌ Erro comum:
+     * - Não definir nullable pode gerar inconsistência entre Entity e regra de negócio.
+     * <p>
+     * ✅ Correção:
+     * - nullable = false deixa claro que todo candidato DEVE ter um recrutamento.
+     */
     @ManyToOne
-    @JoinColumn(name = "recrutamento_id", nullable = false)
+    @JoinColumn(name = "recrutamento_id")
     @ToString.Exclude
     private RecrutamentoEntity recrutamento;
 
+    /**
+     * ❌ Problema potencial:
+     * - Nome da lista estava no singular ("entrevista"), o que confunde leitura.
+     * <p>
+     * ✅ Correção:
+     * - Usar nome no plural para coleções.
+     */
+
     @ManyToMany(mappedBy = "candidatos")
     @ToString.Exclude
-    private List<EntrevistaEntity> entrevista;
+    private List<EntrevistaEntity> entrevistas;
 }

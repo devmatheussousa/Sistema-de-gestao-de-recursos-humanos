@@ -1,6 +1,5 @@
 package com.rh.demo.model.DTOs;
 
-import com.rh.demo.model.entites.FuncionarioEntity;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;

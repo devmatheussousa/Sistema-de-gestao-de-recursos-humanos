@@ -1,8 +1,7 @@
 package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.TipoPonto;
-import com.rh.demo.model.entites.FuncionarioEntity;
-import org.springframework.lang.NonNull;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,15 +9,15 @@ import java.time.LocalTime;
 
 public record PontoDTO(
         Long id,
-        @NonNull
+        @NotNull
         LocalDate data,
-        @NonNull
+        @NotNull
         LocalDateTime horaEntrada,
-        @NonNull
+        @NotNull
         LocalDateTime horaSaida,
-        @NonNull
+        @NotNull
         LocalTime horasTrabalhadas,
-        @NonNull
+        @NotNull
         TipoPonto tipo,
         Long funcionarioId
 ) {

@@ -1,22 +1,22 @@
 package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.TipoEntrevista;
-import org.springframework.lang.NonNull;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public record EntrevistaDTO(
         Long id,
-        @NonNull
+        @NotNull
         LocalDate dataEntrevista,
-        @NonNull
+        @NotNull
         TipoEntrevista tipoEntrevista,
-        @NonNull
+        @NotNull
         String resultadoEntrevista,
-        @NonNull
+        @NotNull
         String observacoesEntrevista,
-        @NonNull
+        @NotNull
         Long recrutamentoId,
         List<Long> candidatosIds
 ) {

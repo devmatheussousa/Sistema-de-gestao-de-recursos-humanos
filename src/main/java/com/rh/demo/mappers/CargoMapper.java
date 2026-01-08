@@ -25,7 +25,20 @@ public class CargoMapper {
                 entity.getDescricao(),
                 entity.getNivel(),
                 entity.getSalario(),
-                entity.getFuncionario(),
+
+                /*
+                  ❌ ERRO ANTERIOR:
+                  entity.getFuncionario()
+
+                  DTO NÃO recebe Entity
+
+                  ✅ CORRETO:
+                  Extrair apenas o ID do relacionamento
+                 */
+
+                entity.getFuncionario() != null
+                ? entity.getFuncionario().getId()
+                        : null,
                 treinamentosIds,
                 recrutamentoIds
         );
@@ -38,7 +51,31 @@ public class CargoMapper {
         entity.setDescricao(dto.descricao());
         entity.setNivel(dto.nivel());
         entity.setSalario(dto.salario());
-        entity.setFuncionario(dto.funcionario());
+
+        /*
+          ❌ ERRO CONCEITUAL COMUM:
+          tentar fazer:
+          entity.setFuncionario(dto.funcionario())
+
+          DTO NÃO possui FuncionarioEntity
+
+          ✅ CORRETO:
+          O relacionamento deve ser resolvido no SERVICE,
+          buscando o FuncionarioEntity pelo ID
+
+          Exemplo no service:
+          FuncionarioEntity f = funcionarioRepository.findById(dto.funcionarioId())
+         */
+        // entity.setFuncionario(...); // resolvido no service
+
+        /*
+          Mesma regra para:
+          - treinamentosIds
+          - recrutamentoIds
+
+          Mapper NÃO acessa banco
+         */
+
         // Note: Mapping treinamentosIds and recrutamentoIds to their respective entity lists should be handled elsewhere
         return entity;
     }

@@ -11,7 +11,6 @@ public class UsuarioLoginMapper {
         return new UsuarioLoginDTO(
                 entity.getId(),
                 entity.getUsername(),
-                entity.getPassword(),
                 entity.getTipoUsuario()
         );
     }
@@ -20,8 +19,8 @@ public class UsuarioLoginMapper {
         UsuarioLoginEntity entity = new UsuarioLoginEntity();
         entity.setId(dto.id());
         entity.setUsername(dto.username());
-        entity.setPassword(dto.password());
         entity.setTipoUsuario(dto.tipoUsuario());
+
         return entity;
     }
 }

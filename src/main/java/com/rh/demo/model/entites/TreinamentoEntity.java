@@ -35,7 +35,7 @@ public class TreinamentoEntity {
     @Column(name = "data_fim_treinamento", nullable = false)
     private LocalDate dataFimTreinamento;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY)
             @JoinTable(
             name = "treinamento_funcionario",
             joinColumns = @JoinColumn(name = "treinamento_id"),

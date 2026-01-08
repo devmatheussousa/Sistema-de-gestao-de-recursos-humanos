@@ -25,7 +25,6 @@ public class DepartamentoEntity {
     private String descricao;
 
     @OneToMany(mappedBy = "departamento")
-    @JsonIgnore // evita recursividade infinita
     @ToString.Exclude
     private List<FuncionarioEntity> funcionarios;
 }

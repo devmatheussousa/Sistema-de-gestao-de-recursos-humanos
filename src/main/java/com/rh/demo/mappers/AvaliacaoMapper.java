@@ -11,7 +11,6 @@ public class AvaliacaoMapper {
     // DTO → Entity
     public AvaliacaoEntity toEntity(AvaliacaoDTO dto) {
         AvaliacaoEntity entity = new AvaliacaoEntity();
-        entity.setId(dto.id());
         entity.setDataAvaliacao(dto.dataAvaliacao());
         entity.setNotaAvaliacao(dto.notaAvaliacao());
         entity.setFeedback(dto.feedback());
@@ -25,6 +24,9 @@ public class AvaliacaoMapper {
 
     // Entity → DTO
     public AvaliacaoDTO toDTO(AvaliacaoEntity entity) {
+        Long funcionarioId = entity.getFuncionario() != null
+                ? entity.getFuncionario().getId() : null;
+        assert entity.getFuncionario() != null;
         return new AvaliacaoDTO(
                 entity.getId(),
                 entity.getDataAvaliacao(),

@@ -1,15 +1,13 @@
 package com.rh.demo.model.DTOs;
 
 import com.rh.demo.enums.TipoUsuario;
-import org.springframework.lang.NonNull;
+import jakarta.validation.constraints.NotNull;
 
 public record UsuarioLoginDTO(
         Long id,
-        @NonNull
+        @NotNull //
         String username,
-        @NonNull
-        String password,
-        @NonNull
+        @NotNull
         TipoUsuario tipoUsuario
 ) {
 }

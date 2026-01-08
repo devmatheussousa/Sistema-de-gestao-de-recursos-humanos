@@ -3,6 +3,7 @@ package com.rh.demo.services;
 import com.rh.demo.mappers.BeneficioMapper;
 import com.rh.demo.model.DTOs.AvaliacaoDTO;
 import com.rh.demo.model.DTOs.BeneficioDTO;
+import com.rh.demo.model.entites.FuncionarioEntity;
 import com.rh.demo.repositories.BeneficioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -39,7 +40,7 @@ public class BeneficioService {
     }
 
     //Criar benefício
-    public BeneficioDTO criarBeneficio(BeneficioDTO beneficioDTO){
+    public BeneficioDTO criarBeneficio(BeneficioDTO beneficioDTO, Long id){
         var beneficioEntity = beneficioMapper.toEntity(beneficioDTO);
         var beneficioSalvo = beneficioRepository.save(beneficioEntity);
         return beneficioMapper.toDTO(beneficioSalvo);

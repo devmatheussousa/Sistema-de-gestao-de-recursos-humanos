@@ -23,10 +23,10 @@ public class FuncionarioEntity {
     private String nome;
 
     @Column(name = "cpf_funcionario", unique = true)
-    private Long cpf;
+    private String cpf;
 
     @Column(name = "telefone_funcionario", unique = true)
-    private Long telefone;
+    private String telefone;
 
     @Column(name = "email_funcionario", unique = true)
     private String email;
@@ -44,12 +44,12 @@ public class FuncionarioEntity {
     //relacionamento
 
     @ManyToOne // muitos funcionarios para um departamento
-    @JoinColumn(name = "departamento_id")
+    @JoinColumn(name = "departamento_id", nullable = false)
     @ToString.Exclude
     DepartamentoEntity departamento;
 
     @OneToOne // um funcionario para um cargo
-    @JoinColumn(name = "cargo_id")
+    @JoinColumn(name = "cargo_id", nullable = false)
     @ToString.Exclude
     CargoEntity cargo;
 

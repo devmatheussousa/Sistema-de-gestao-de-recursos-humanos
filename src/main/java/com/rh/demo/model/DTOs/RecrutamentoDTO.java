@@ -3,6 +3,7 @@ package com.rh.demo.model.DTOs;
 import com.rh.demo.enums.StatusRecrutamento;
 import com.rh.demo.model.entites.CargoEntity;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
@@ -11,19 +12,19 @@ import java.util.List;
 
 public record RecrutamentoDTO(
         Long id,
-        @NonNull
+        @NotNull
         String tituloVaga,
-        @NonNull
+        @NotNull
         String descricaoVaga,
-        @NonNull
+        @NotNull
         LocalDate dataAbertura,
-        @NonNull
+        @NotNull
         LocalDateTime dataEncerramento,
-        @NonNull
+        @NotNull
         StatusRecrutamento statusRecrutamento,
-        @NonNull @Min(1)
+        @NotNull
         Long cargoId,
-        List<Long> candidatosIds,
-        List<Long> entrevistasIds
+        List<@NotNull Long> candidatosIds,
+        List<@NotNull Long> entrevistasIds
 ) {
 }

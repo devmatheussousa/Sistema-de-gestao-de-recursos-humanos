@@ -12,7 +12,8 @@ public class DepartamentoMapper {
 
     // Conversão de Entity para DTO
     public DepartamentoDTO toDTO(DepartamentoEntity entity){
-        List<Long> funcionariosIds = entity.getFuncionarios()
+        List<Long> funcionariosIds = entity.getFuncionarios() == null ? List.of()
+                : entity.getFuncionarios()
                 .stream()
                 .map(FuncionarioEntity::getId)
                 .toList();

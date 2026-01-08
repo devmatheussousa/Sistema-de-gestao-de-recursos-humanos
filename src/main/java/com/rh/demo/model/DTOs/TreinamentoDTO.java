@@ -1,5 +1,6 @@
 package com.rh.demo.model.DTOs;
 
+import jakarta.validation.constraints.NotNull;
 import org.springframework.lang.NonNull;
 
 import java.time.LocalDate;
@@ -7,16 +8,17 @@ import java.util.List;
 
 public record TreinamentoDTO(
         Long id,
-        @NonNull
+        @NotNull
         String nomeTreinamento,
-        @NonNull
+        @NotNull
         String descricaoTreinamento,
-        @NonNull
+        @NotNull
         Integer cargaHoraria,
-        @NonNull
+        @NotNull
         LocalDate dataInicio,
-        @NonNull
+        @NotNull
         LocalDate dataFimTreinamento,
+
         List<Long> funcionarioIds,
         List<Long> cargoIds
 ) {

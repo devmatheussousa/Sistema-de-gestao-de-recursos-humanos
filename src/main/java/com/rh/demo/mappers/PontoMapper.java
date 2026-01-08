@@ -1,6 +1,7 @@
 package com.rh.demo.mappers;
 
 import com.rh.demo.model.DTOs.PontoDTO;
+import com.rh.demo.model.entites.FuncionarioEntity;
 import com.rh.demo.model.entites.PontoEntity;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,9 @@ public class PontoMapper {
                 entity.getHoraSaida(),
                 entity.getHorasTrabalhadas(),
                 entity.getTipo(),
-                entity.getFuncionario()
+                entity.getFuncionario() != null
+                ? entity.getFuncionario().getId()
+                        :null
         );
     }
 
@@ -26,7 +29,13 @@ public class PontoMapper {
         entity.setHoraSaida(dto.horaSaida());
         entity.setHorasTrabalhadas(dto.horasTrabalhadas());
         entity.setTipo(dto.tipo());
-        entity.setFuncionario(dto.funcionario());
+
+        if(dto.funcionarioId() != null){
+            FuncionarioEntity funcionario = new FuncionarioEntity();
+            funcionario.setId(dto.funcionarioId());
+            entity.setFuncionario(funcionario);
+        }
+
         return entity;
     }
 }

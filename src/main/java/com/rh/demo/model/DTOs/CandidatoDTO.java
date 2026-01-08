@@ -14,7 +14,7 @@ public record CandidatoDTO(
         @NotNull String telefoneCandidato,
         String curriculoUrl,
         @NotNull StatusCandidato statusCandidato,
-        @NotNull RecrutamentoEntity recrutamento,
-        @NotNull @Size(min = 1) List<@NotNull Long> entrevistaIds
+        @NotNull Long recrutamentoId, //❌ ERRO: DTO NÃO pode conter Entity (RecrutamentoEntity).Isso acopla API à camada de persistência. ✅ CORREÇÃO:Usar apenas o ID do relacionamento.
+        @NotNull @Size(min = 1) List<@NotNull Long> entrevistaIds //❌ Antes estava correto conceitualmente, mas agora fica consistente com a remoção da Entity acima.
 ) {
 }

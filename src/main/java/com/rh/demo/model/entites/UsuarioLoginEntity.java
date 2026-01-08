@@ -17,10 +17,10 @@ public class UsuarioLoginEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "login_username", length = 255)
+    @Column(name = "login_username", length = 255, nullable = false, unique = true)
     private String username;
 
-    @Column(name = "login_password", length = 255)
+    @Column(name = "login_password", length = 255, nullable = false)
     private String password;
 
     @Column(name = "login_tipo_usuario", length = 255)

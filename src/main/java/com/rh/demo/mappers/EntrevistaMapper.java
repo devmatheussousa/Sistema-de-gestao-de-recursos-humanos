@@ -11,10 +11,15 @@ import java.util.List;
 public class EntrevistaMapper {
 
     public EntrevistaDTO toDTO(EntrevistaEntity entity){
-        List<Long> candidatosIds = entity.getCandidatos()
+        List<Long> candidatosIds = entity.getCandidatos() == null ? List.of()
+                : entity.getCandidatos()
                 .stream()
                 .map(CandidatoEntity::getId)
                 .toList();
+
+        //se o recrutamento for nulo, atribui null ao recrutamentoId
+        Long recrutamentoId = entity.getRecrutamento() != null
+                ? entity.getRecrutamento().getId() : null;
 
         return new EntrevistaDTO(
                 entity.getId(),
@@ -22,8 +27,8 @@ public class EntrevistaMapper {
                 entity.getTipoEntrevista(),
                 entity.getResultadoEntrevista(),
                 entity.getObservacoesEntrevista(),
-                entity.getRecrutamento().getId(),
-                candidatosIds
+                recrutamentoId, //pega o id do recrutamento
+                candidatosIds //pega a lista de ids dos candidatos
         );
     }
 }

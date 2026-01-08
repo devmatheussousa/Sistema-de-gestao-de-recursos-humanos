@@ -21,11 +21,11 @@ public class EntrevistaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "data_entrevista")
+    @Column(name = "data_entrevista", nullable = false) // data da entrevista
     private LocalDate dataEntrevista;
 
     @Enumerated(EnumType.STRING) // para persistir o enum como string no banco de dados
-    @Column(name = "tipo_entrevista")
+    @Column(name = "tipo_entrevista", nullable = false)
     private TipoEntrevista tipoEntrevista;
 
     @Column(name = "resultado_entrevista", nullable = false, length = 100) // resultado da entrevista (aprovado, reprovado, etc.)
