@@ -1,6 +1,6 @@
 package com.rh.demo.mappers;
 
-import com.rh.demo.model.DTOs.AvaliacaoDTO;
+import com.rh.demo.model.DTOs.AvaliacaoDTOs.AvaliacaoDTO;
 import com.rh.demo.model.entites.AvaliacaoEntity;
 import com.rh.demo.model.entites.FuncionarioEntity;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,7 @@
 package com.rh.demo.services;
 
 import com.rh.demo.mappers.BeneficioMapper;
-import com.rh.demo.model.DTOs.AvaliacaoDTO;
 import com.rh.demo.model.DTOs.BeneficioDTO;
-import com.rh.demo.model.entites.FuncionarioEntity;
 import com.rh.demo.repositories.BeneficioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;

@@ -1,4 +1,4 @@
-package com.rh.demo.model.DTOs;
+package com.rh.demo.model.DTOs.AvaliacaoDTOs;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;

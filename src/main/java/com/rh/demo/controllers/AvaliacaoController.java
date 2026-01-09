@@ -1,14 +1,16 @@
 package com.rh.demo.controllers;
 
-import com.rh.demo.model.DTOs.AvaliacaoDTO;
+import com.rh.demo.model.DTOs.AvaliacaoDTOs.AvaliacaoDTO;
+import com.rh.demo.model.DTOs.AvaliacaoDTOs.PageResponse;
 import com.rh.demo.services.AvaliacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/avaliacoes")
@@ -19,17 +21,23 @@ public class AvaliacaoController {
 
 
     //criar avaliação
-    @PostMapping("/criar")
+    @PostMapping
     public ResponseEntity<AvaliacaoDTO> criarAvaliacao(@RequestBody @Valid AvaliacaoDTO novaAvaliacaoDTO){
        AvaliacaoDTO avaliacaoDTO = avaliacaoService.criarAvaliacao(novaAvaliacaoDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoDTO);
     }
 
     //Listar avaliações com paginação
-    @GetMapping("/listar")
-    public ResponseEntity<Page<AvaliacaoDTO>> listarAvaliacoes(Pageable pageable){
-        Page<AvaliacaoDTO> avaliacoesPage = avaliacaoService.listarAvaliacoes(pageable);
-        return ResponseEntity.ok(avaliacoesPage);
+    @GetMapping
+    public ResponseEntity<PageResponse<AvaliacaoDTO>> listarAvaliacoes(@RequestParam(defaultValue = "0")  int page,
+                                                                       @RequestParam(defaultValue = "10")  int size){
+       return ResponseEntity.ok(avaliacaoService.listarAvaliacoes(page, size));
+    }
+
+    //Listar avaliacoes sem paginação
+    @GetMapping("/all")
+    public ResponseEntity<List<AvaliacaoDTO>> listarAvaliacoesSemPaginacao(){
+        return ResponseEntity.ok(avaliacaoService.listarAvaliacoesSemPaginacao());
     }
 
     //Buscar por Id
@@ -39,7 +47,7 @@ public class AvaliacaoController {
     }
 
     //Deletar avaliação
-    @DeleteMapping("/deletar/{id}")
+    @DeleteMapping("{id}")
     public ResponseEntity<Void> deletarAvaliacao(@PathVariable Long id) {
         avaliacaoService.deletarAvaliacao(id);
         return ResponseEntity.noContent().build();
@@ -47,7 +55,8 @@ public class AvaliacaoController {
 
     // Atualizar avaliação
     @PutMapping("/atualizar/{id}")
-    public ResponseEntity<AvaliacaoDTO> atualizarAvaliacao(@PathVariable Long id, @RequestBody AvaliacaoDTO avaliacaoDTO) {
+    public ResponseEntity<AvaliacaoDTO> atualizarAvaliacao(@PathVariable Long id,
+                                                           @RequestBody @Valid AvaliacaoDTO avaliacaoDTO) {
         AvaliacaoDTO atualizadoAvaliacaoDTO = avaliacaoService.atualizarAvaliacao(id, avaliacaoDTO);
         return ResponseEntity.ok(atualizadoAvaliacaoDTO);
     }
