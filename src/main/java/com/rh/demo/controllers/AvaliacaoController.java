@@ -21,14 +21,14 @@ public class AvaliacaoController {
 
 
     //criar avaliação
-    @PostMapping
+    @PostMapping("/criar")
     public ResponseEntity<AvaliacaoDTO> criarAvaliacao(@RequestBody @Valid AvaliacaoDTO novaAvaliacaoDTO){
        AvaliacaoDTO avaliacaoDTO = avaliacaoService.criarAvaliacao(novaAvaliacaoDTO);
        return ResponseEntity.status(HttpStatus.CREATED).body(avaliacaoDTO);
     }
 
     //Listar avaliações com paginação
-    @GetMapping
+    @GetMapping("/paginated")
     public ResponseEntity<PageResponse<AvaliacaoDTO>> listarAvaliacoes(@RequestParam(defaultValue = "0")  int page,
                                                                        @RequestParam(defaultValue = "10")  int size){
        return ResponseEntity.ok(avaliacaoService.listarAvaliacoes(page, size));

@@ -3,43 +3,51 @@ package com.rh.demo.services;
 import com.rh.demo.mappers.BeneficioMapper;
 import com.rh.demo.model.DTOs.BeneficioDTO;
 import com.rh.demo.repositories.BeneficioRepository;
-import jakarta.transaction.Transactional;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import com.rh.demo.repositories.FuncionarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
+import java.util.List;
 
 @Service
 public class BeneficioService {
 
     private final BeneficioRepository beneficioRepository;
     private final BeneficioMapper beneficioMapper;
+    private final FuncionarioRepository funcionarioRepository;
 
 
-    public BeneficioService(BeneficioRepository beneficioRepository, BeneficioMapper beneficioMapper) {
+    public BeneficioService(BeneficioRepository beneficioRepository, BeneficioMapper beneficioMapper, FuncionarioRepository funcionarioRepository) {
         this.beneficioRepository = beneficioRepository;
         this.beneficioMapper = beneficioMapper;
+        this.funcionarioRepository = funcionarioRepository;
     }
 
 
     //Listar todos os benefícios
-    public Page<BeneficioDTO> listarBeneficios(Pageable pageable){
-        return beneficioRepository
-                .findAll(pageable) // Busca todos os benefícios com paginação
-                .map(beneficioMapper::toDTO); // Mapeia cada entidade Beneficio
+    public List<BeneficioDTO> listarBeneficios(){
+        return beneficioRepository.findAll()
+                .stream()
+                .map(beneficioMapper::toDTO)
+                .toList();
     }
 
     // Buscar benefício por ID
-    public Optional<BeneficioDTO> buscarBeneficioPorId(Long id){
-        return Optional.ofNullable(beneficioRepository.findById(id)
+    public BeneficioDTO buscarBeneficioPorId(Long id){
+        return beneficioRepository.findById(id)
                 .map(beneficioMapper::toDTO)
-                .orElseThrow(() -> new RuntimeException("Benefício não encontrado com o ID: " + id)));
+                .orElseThrow(() -> new RuntimeException("Benefício não encontrado com o ID: " + id
+                ));
     }
 
     //Criar benefício
-    public BeneficioDTO criarBeneficio(BeneficioDTO beneficioDTO, Long id){
+    public BeneficioDTO criarBeneficio(BeneficioDTO beneficioDTO){
+        //Cria o benefício
         var beneficioEntity = beneficioMapper.toEntity(beneficioDTO);
+        beneficioEntity.setId(null); // Garante que o ID seja nulo para criação
+        if(beneficioRepository.existsById(beneficioEntity.getId())){
+                throw new RuntimeException("Benefício com ID " + beneficioEntity.getId() + " já existe.");
+        }
         var beneficioSalvo = beneficioRepository.save(beneficioEntity);
         return beneficioMapper.toDTO(beneficioSalvo);
     }
@@ -54,6 +62,7 @@ public class BeneficioService {
     }
 
     // Atualizar benefício
+    @Transactional
     public BeneficioDTO beneficioDTO(Long id, BeneficioDTO dto){
         var beneficio = beneficioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Benefício não encontrado com o ID: " + id));

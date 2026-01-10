@@ -1,6 +1,5 @@
 package com.rh.demo.mappers;
 
-import com.rh.demo.model.DTOs.CandidatoDTO;
 import com.rh.demo.model.DTOs.CargoDTO;
 import com.rh.demo.model.entites.*;
 import org.springframework.stereotype.Component;
