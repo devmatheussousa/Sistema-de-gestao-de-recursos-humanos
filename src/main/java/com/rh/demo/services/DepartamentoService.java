@@ -1,7 +1,6 @@
 package com.rh.demo.services;
 
 import com.rh.demo.mappers.DepartamentoMapper;
-import com.rh.demo.model.DTOs.CandidatoDTO;
 import com.rh.demo.model.DTOs.DepartamentoDTO;
 import com.rh.demo.repositories.DepartamentoRepository;
 import lombok.RequiredArgsConstructor;
@@ -58,6 +57,7 @@ public class DepartamentoService {
         //buscar candidato pelo ID
         var departamento = departamentoRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Departamento não encontrado"));
+        departamento.setId(id); //Garantir que o ID do departamento seja o mesmo do DTO
         //Atualizar campos do departamento com base nos dados do DTO
         departamento.setNome(departamentoDTO.nome());
         departamento.setDescricao(departamentoDTO.descricao());
