@@ -51,7 +51,6 @@ public class CargoService {
         var cargoEntity = cargoMapper.toEntity(cargoDTO);
         cargoEntity.setId(null); // Garantir que o ID seja nulo para criação
 
-        definirSalarioPorNivel(cargoEntity);
 
         //Definir o salario baseado no nível do cargo
         definirSalarioPorNivel(cargoEntity);
