@@ -31,4 +31,14 @@ public class EntrevistaMapper {
                 candidatosIds //pega a lista de ids dos candidatos
         );
     }
+
+    public EntrevistaEntity toEntity(EntrevistaDTO dto){
+        var entity = new EntrevistaEntity();
+        entity.setId(dto.id());
+        entity.setDataEntrevista(dto.dataEntrevista());
+        entity.setTipoEntrevista(dto.tipoEntrevista());
+        entity.setResultadoEntrevista(dto.resultadoEntrevista());
+        entity.setObservacoesEntrevista(dto.observacoesEntrevista());
+        return entity;
+    }
 }
